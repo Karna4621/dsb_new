@@ -37,10 +37,10 @@ config1, nod_net, loss, get_pbb = nodmodel.get_model()
 checkpoint = torch.load(config_submit['detector_param'])
 nod_net.load_state_dict(checkpoint['state_dict'])
 
-#torch.set_device(0)
+torch.set_device(0)
 nod_net = nod_net
-#cudnn.benchmark = True
-#nod_net = DataParallel(nod_net)
+cudnn.benchmark = True
+nod_net = DataParallel(nod_net)
 
 bbox_result_path = './bbox_result'
 if not os.path.exists(bbox_result_path):
@@ -70,10 +70,10 @@ config2 = casemodel.config
 checkpoint = torch.load(config_submit['classifier_param'],encoding= 'unicode_escape')
 casenet.load_state_dict(checkpoint['state_dict'])
 
-#torch.cuda.set_device(0)
+torch.cuda.set_device(0)
 casenet = casenet
-#cudnn.benchmark = True
-#casenet = DataParallel(casenet)
+cudnn.benchmark = True
+casenet = DataParallel(casenet)
 
 filename = config_submit['outputfile']
 
